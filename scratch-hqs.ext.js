@@ -153,21 +153,49 @@
         return s;
     };
 
-    ext.is_enabled = function (name) {
+    ext.is_enabled = function () {
         return true;
     };
+    
+    ext.is_playing = function(name){
+    	if (sounds.hasOwnProperty(name)) {
+            return !(sounds[name].audio.paused);
+        } else return false;
+    }
+    
+     ext.get_length = function(name){
+    	if (sounds.hasOwnProperty(name)) {
+            return sounds[name].audio.duration;
+        } else return 0;
+    }
+    
+     ext.get_time = function(name){
+    	if (sounds.hasOwnProperty(name)) {
+            return sounds[name].audio.currentTime;
+        } else return 0;
+    }
+    
+     ext.set_time = function(name, time){
+    	if (sounds.hasOwnProperty(name)) {
+            sounds[name].audio.currentTime = time;
+        }
+    }
 
     var descriptor = {
         blocks: [
             ['b', 'Is Running HQS?', 'is_enabled'],
             ['w', 'Load sound %s %s', 'load_sound', 'sound name', 'md5'],
-			['w', 'Load sound %s from url %s', 'load_sound_url', 'sound name', 'url'],
+            ['w', 'Load sound %s from url %s', 'load_sound_url', 'sound name', 'url'],
             ['r', 'Percentage of %s loaded', 'percent_loaded', 'sound name'],
             [' ', 'Play or resume sound %s', 'play', 'sound name'],
             [' ', 'Pause sound %s', 'pause', 'sound name'],
             [' ', 'Stop sound %s', 'stop', 'sound name'],
             [' ', 'Set volume for sound %s to %n', 'set_volume', 'sound name', 100],
             ['r', 'Volume of sound %s', 'get_volume', 'sound name'],
+            ['b', 'Is sound %s playing?', 'is_playing', 'sound name'],
+            ['r', 'Length of sound %s in seconds', 'get_length', 'sound name'],
+            ['r', 'Current position in sound %s in seconds', 'get_time', 'sound name'],
+            [' ', 'Set position in sound %s to %n seconds', 'set_time', 'sound name', '5'],
             [' ', 'Stop all sounds', 'global_stop'],
             [' ', 'Pause all sounds', 'global_pause'],
             [' ', 'Set volume of all sounds to %n', 'global_set_volume', 100],
