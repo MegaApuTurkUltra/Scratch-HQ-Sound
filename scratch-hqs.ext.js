@@ -53,7 +53,7 @@
                 callback();
             }
         };
-        xhr.open('GET', "http://cdn.assets.scratch.mit.edu/internalapi/asset/" + md5 + ".wav/get/");
+        xhr.open('GET', "https://cdn.assets.scratch.mit.edu/internalapi/asset/" + md5 + ".wav/get/");
         xhr.responseType = 'blob';
         xhr.send();
     };
@@ -201,7 +201,7 @@
             [' ', 'Set volume of all sounds to %n', 'global_set_volume', 100],
             ['r', 'Get all loaded sounds', 'get_all_sounds']
         ],
-        url: "http://scratch.mit.edu/discuss/youtube/dQw4w9WgXcQ/" // yes
+        url: "https://scratch.mit.edu/discuss/youtube/dQw4w9WgXcQ/" // yes
     };
     ScratchExtensions.register('High Quality Sounds', descriptor, ext);
 })({});
